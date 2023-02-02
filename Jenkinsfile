@@ -1,5 +1,4 @@
-@Library("shared-library@master") _
-
+//@Library("shared-library@master") _
 pipeline {
     agent {
         docker { image 'node:16.13.1-alpine' }
