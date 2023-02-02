@@ -6,6 +6,7 @@ pipeline {
           cloud 'kubernetes'
           defaultContainer 'jnlp'
           idleMinutes 0
+          yaml libraryResource("resources/s2i.yaml")
           }
     }
     options {
