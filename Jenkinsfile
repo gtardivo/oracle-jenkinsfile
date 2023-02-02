@@ -1,9 +1,80 @@
 //@Library("shared-library@master") _
 pipeline {
     agent {
-        docker {
-          image 'atf.intranet.bb.com.br:5001/bb/aic/aic-alpine:3.11.5'          
-          }
+        kubernetes {
+          activeDeadlineSeconds 60
+          cloud 'kubernetes'
+          defaultContainer 'jnlp'
+          idleMinutes 0          
+          yaml '''
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    br.com.bb.sigla: psc
+    br.com.bb.compilacao: false
+    br.com.bb.compilacao.linguagem: docker
+    br.com.bb.compilacao.versao: 18
+spec:
+  imagePullSecrets:
+  - name: atfregistry
+  tolerations:
+    - key: "papel.node.k8s.bb/workload"
+      operator: "Equal"
+      value: "true"
+      effect: "NoSchedule"
+  nodeSelector:
+    papel.node.k8s.bb/workload: true
+  slaveConnectTimeout: 180000
+  volumes:
+  - hostPath:
+      path: /var/run/docker.sock
+      type: ""
+    name: docker-socket-volume
+  - hostPath:
+      path: /var/tmp/jenkins_slave/
+      type: ""
+    name: temp-home-volume
+  containers:
+  - name: jnlp
+    image: atf.intranet.bb.com.br:5001/bb/aic/aic-jenkins-slave:3.30.0
+    tty: true
+    resources:
+      requests:
+        cpu: "250m"
+        memory: "512Mi"
+      limits:
+        cpu: "250m"
+        memory: "512Mi"
+  - name: deploy
+    image: atf.intranet.bb.com.br:5001/bb/psc/psc-helm:2.14.0
+    tty: true
+    resources:
+      requests:
+        cpu: "250m"
+        memory: "512Mi"
+      limits:
+        cpu: "250m"
+        memory: "512Mi"
+  - name: build
+    image: atf.intranet.bb.com.br:5001/bb/big/big-source-to-image:0.1.0
+    tty: true
+    resources:
+      requests:
+        cpu: "250m"
+        memory: "512Mi"
+      limits:
+        cpu: "250m"
+        memory: "512Mi"
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - mountPath: /var/run/docker.sock
+      name: docker-socket-volume
+    command:
+    - cat
+'''
+   }
     }
     options {
         disableConcurrentBuilds()
@@ -13,8 +84,8 @@ pipeline {
     parameters {
         string name: 'ENVIRONMENT_NAME', trim: true
         password defaultValue: '', description: 'Password to use for MySQL container - root user', name: 'MYSQL_PASSWORD'
-        string name : 'MYSQL_PORT', trim: true
-
+        string defaultValue: '3306',  description: 'Mysql port number', name: 'MYSQL_PORT', trim: true
+        //[22,389,443,3306,6446,6447,6448,6449,33060,33061,11211]
         booleanParam(name: 'SKIP_STEP_1', defaultValue: false, description: 'STEP 1 - RE-CREATE DOCKER IMAGE')
     }
   
@@ -68,4 +139,4 @@ pipeline {
         }
     }
 
-}    
+}
