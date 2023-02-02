@@ -90,7 +90,7 @@ spec:
     }
   
     stages {
-        stage('Checkout GIT repository') {
+        /*stage('Checkout GIT repository') {
             steps {     
               script {
                 git branch: 'master',
@@ -98,7 +98,7 @@ spec:
                 url: 'git@mysecret-nonexistent-repo/jenkins.git'
               }
             }
-        }
+        }*/
         stage('Create latest Docker image') {
             steps {     
               script {
