@@ -1,21 +1,12 @@
 //@Library("shared-library@master") _
 pipeline {
-    stages {
-        stage('get Yaml') {
-            steps {     
-              script {
-                yaml readYaml file : 'resources/s2i.yaml'
-              }
-            }
-        }
-    }
     agent {
-        kubernetes {
+        docker {
           activeDeadlineSeconds 60
           cloud 'kubernetes'
           defaultContainer 'jnlp'
           idleMinutes 0
-          yaml
+          
           }
     }
     options {
@@ -26,7 +17,7 @@ pipeline {
     parameters {
         string name: 'ENVIRONMENT_NAME', trim: true
         password defaultValue: '', description: 'Password to use for MySQL container - root user', name: 'MYSQL_PASSWORD'
-        string name: 'MYSQL_PORT', trim: true
+        string name = ["22","389","443","3306","6446","6447","6448","6449","33060","33061","11211"]: 'MYSQL_PORT', trim: true
 
         booleanParam(name: 'SKIP_STEP_1', defaultValue: false, description: 'STEP 1 - RE-CREATE DOCKER IMAGE')
     }

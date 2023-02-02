@@ -32,6 +32,7 @@ This archive contains all the files being used by the current version of the pip
 ## Further improvement requests
 
 - Pipeline should fail if the MySQL port parameter is not a valid number within port range
+https://dev.mysql.com/blog-archive/mysqlserverteam/wp-content/uploads/2018/07/MySQLPortsTablev2.pdf
 - Developers would also need a table called "departments" under the "DEVAPP" database with the following columns and with some demo data populated
     - DEPT - number 4 digit
     - DEPT_NAME - varchar 250
