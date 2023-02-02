@@ -6,8 +6,7 @@ pipeline {
           cloud 'kubernetes'
           defaultContainer 'jnlp'
           idleMinutes 0
-          yaml "---
-                apiVersion: v1
+          yaml "apiVersion: v1
                 kind: Pod
                 metadata:
                   labels:
