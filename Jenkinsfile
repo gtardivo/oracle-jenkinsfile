@@ -1,12 +1,21 @@
 //@Library("shared-library@master") _
 pipeline {
+    stages {
+        stage('get Yaml') {
+            steps {     
+              script {
+                yaml readYaml file : 'resources/s2i.yaml'
+              }
+            }
+        }
+    }
     agent {
         kubernetes {
           activeDeadlineSeconds 60
           cloud 'kubernetes'
           defaultContainer 'jnlp'
           idleMinutes 0
-          yaml readYaml file : 'resources/s2i.yaml'
+          yaml
           }
     }
     options {
