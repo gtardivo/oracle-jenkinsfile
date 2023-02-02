@@ -2,7 +2,7 @@
 
 pipeline {
     agent {
-        label 'docker-host'
+        image 'node:16.13.1-alpine'
     }
     options {
         disableConcurrentBuilds()
