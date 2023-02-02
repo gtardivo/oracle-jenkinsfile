@@ -1,7 +1,12 @@
 //@Library("shared-library@master") _
 pipeline {
     agent {
-        docker { image 'node:16.13.1-alpine' }
+        kubernetes {
+          activeDeadlineSeconds 60
+          cloud 'kubernetes'
+          defaultContainer 'jnlp'
+          idleMinutes 0
+          }
     }
     options {
         disableConcurrentBuilds()
@@ -9,9 +14,9 @@ pipeline {
     }
 
     parameters {
-        string name: 'ENVIRONMENT_NAME', trim: true     
+        string name: 'ENVIRONMENT_NAME', trim: true
         password defaultValue: '', description: 'Password to use for MySQL container - root user', name: 'MYSQL_PASSWORD'
-        string name: 'MYSQL_PORT', trim: true  
+        string name: 'MYSQL_PORT', trim: true
 
         booleanParam(name: 'SKIP_STEP_1', defaultValue: false, description: 'STEP 1 - RE-CREATE DOCKER IMAGE')
     }
