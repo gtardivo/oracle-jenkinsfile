@@ -36,7 +36,7 @@ pipeline {
                     docker --version
                     """
                     sh """
-                    docker build pipelines/ -t $params.ENVIRONMENT_NAME:latest --build-arg http_proxy="$http_proxy" --build-arg https_proxy="$http_proxy" --build-arg no_proxy="$no_proxy"
+                    docker build pipelines/ -t $params.ENVIRONMENT_NAME:latest
                     """
                 }else{
                     echo "Skipping STEP1"
