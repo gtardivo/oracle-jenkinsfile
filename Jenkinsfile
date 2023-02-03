@@ -123,7 +123,7 @@ pipeline {
                     docker --version
                     """
                     sh """
-                    docker build pipelines/ -t $params.ENVIRONMENT_NAME:latest $params.MYSQL_PASSWORD
+                    docker build pipelines/ -t $params.ENVIRONMENT_NAME:latest
                     """
 
                 }else{
