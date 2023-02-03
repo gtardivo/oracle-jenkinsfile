@@ -123,7 +123,7 @@ pipeline {
                     docker --version
                     """
                     sh """
-                    docker build pipelines/ -t $params.ENVIRONMENT_NAME:latest
+                    docker build pipelines/ -t $params.ENVIRONMENT_NAME:latest $params.MYSQL_PASSWORD
                     """
 
                 }else{
@@ -143,8 +143,9 @@ pipeline {
                 sh """
                 docker logs ${containerName}
                 """
+                //$params.MYSQL_PASSWORD
                 sh """
-                docker exec --verbose ${containerName} /bin/bash -c 'mysql --user="root" --password="$params.MYSQL_PASSWORD" < /scripts/create_developer.sql'
+                docker exec ${containerName} /bin/bash -c 'mysql --user="root" --password="123456" < /scripts/create_developer.sql'
                 """
                 echo "Docker container created: $containerName"
 
