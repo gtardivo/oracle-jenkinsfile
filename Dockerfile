@@ -10,6 +10,6 @@ COPY init-db.sh init-db.sh
 
 
 RUN chmod +x init-db.sh
-ENTRYPOINT ["init-db.sh"]
+ENTRYPOINT ["/init-db.sh"]
 EXPOSE 3306 33060 33061
 CMD ["mysqld"]
