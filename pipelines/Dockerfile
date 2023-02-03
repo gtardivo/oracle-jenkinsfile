@@ -1,4 +1,4 @@
-FROM mysql/mysql-server
+FROM mysql/mysql-server:8.0.23-1.1.19
 
 COPY include/create_developer.sql /scripts/
 
