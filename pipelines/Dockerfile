@@ -1,5 +1,5 @@
 #FROM atf.intranet.bb.com.br:5001/mysql/mysql-server:latest
-FROM mysql-server:latest
+FROM mysql/mysql-server
 
 COPY include/create_developer.sql /scripts/
 
