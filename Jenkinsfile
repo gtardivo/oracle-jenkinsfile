@@ -87,7 +87,7 @@ pipeline {
 
     parameters {
       string(name: 'ENVIRONMENT_NAME', defaultValue: 'teste', trim: true, description: '')
-      password(name: 'MYSQL_PASSWORD', defaultValue: '', description: 'Password to use for MySQL container - root user')
+      password(name: 'MYSQL_PASSWORD', defaultValue: '123456', description: 'Password to use for MySQL container - root user')
       string(name: 'MYSQL_PORT', defaultValue: '3306', description: 'Mysql port number', trim: true)
       booleanParam(name: 'SKIP_STEP_1', defaultValue: false, description: 'STEP 1 - RE-CREATE DOCKER IMAGE')
     }
@@ -141,11 +141,14 @@ pipeline {
                 docker run -d --name ${containerName} -e MYSQL_ROOT_PASSWORD=$params.MYSQL_PASSWORD -p $params.MYSQL_PORT:3306 $params.ENVIRONMENT_NAME:latest
                 """
                 sh """
+                sleep 20
+                """
+                sh """
                 docker logs ${containerName}
                 """
                 //mysql -h 127.0.0.1 -p 3306 --user="root" --password="123456" > /scripts/create_developer.sql
                 sh """
-                docker exec ${containerName} /bin/bash -c 'cat /etc/mysql/my.cnf'
+                docker exec ${containerName} /bin/bash -c 'cat /usr/bin/mysqld'
                 """
                 echo "Docker container created: $containerName"
               
