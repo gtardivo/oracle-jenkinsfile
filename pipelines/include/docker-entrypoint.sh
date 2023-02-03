@@ -1,14 +1,13 @@
 #!/bin/bash
-
 # Start the MySQL daemon
-/usr/bin/mysqld_safe &
+/usr/bin/mysqld &
 
 # Wait for the MySQL daemon to start
-sleep 10s
+sleep 10
 
 # Create a new database and user
 mysql --user=root <<-EOSQL
-    CREATE DATABASE mydb;
+    CREATE DATABASE DEVAPP;
     CREATE USER 'myuser'@'%' IDENTIFIED BY 'password';
     GRANT ALL PRIVILEGES ON mydb.* TO 'myuser'@'%';
 EOSQL
