@@ -15,7 +15,7 @@ pipeline {
         stage('Validate MYSQL_PORT') {
             steps {
                 script {
-                    def mysql_port_values = [3306, 33060, 33061]
+                    def mysql_port_values = ["3306", "33060", "33061"]
                     def mysql_port = params.MYSQL_PORT.toInteger()
                     
                     if (!mysql_port_values.contains(mysql_port)) {
