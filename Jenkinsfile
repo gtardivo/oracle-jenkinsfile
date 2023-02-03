@@ -144,7 +144,7 @@ pipeline {
                 docker logs ${containerName}
                 """
                 sh """
-                docker exec ${containerName} /bin/bash -c 'mysql --user="root" --password="123456" > /scripts/create_developer.sql'
+                docker exec ${containerName} /bin/bash -c 'mysql -h 127.0.0.1 -p 3306 --user="root" --password="123456" > /scripts/create_developer.sql'
                 """
                 echo "Docker container created: $containerName"
 
