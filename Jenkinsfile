@@ -76,8 +76,8 @@ pipeline {
 //     command:
 //     - cat
 // '''
-}
-    //}
+//}
+  //  }
     options {
         disableConcurrentBuilds()
         disableResume()
@@ -97,7 +97,7 @@ pipeline {
     if (!mysql_port_values.contains(mysql_port)) {
       error("Invalid value for MYSQL_PORT. Valid values are: ${mysql_port_values.join(', ')}")
     }
-  
+
     stages {
         /*stage('Checkout GIT repository') {
             steps {     
@@ -153,4 +153,4 @@ pipeline {
         }
     }
 
-//}
+}
