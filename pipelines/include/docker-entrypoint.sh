@@ -19,17 +19,17 @@ echo "[Entrypoint] MySQL Docker Image 8.0.23-1.1.19"
 # Fetch value from server config
 # We use mysqld --verbose --help instead of my_print_defaults because the
 # latter only show values present in config files, and not server defaults
-_get_config() {
-	local conf="$1"; shift
-	"$@" --verbose --help 2>/dev/null | grep "^$conf" | awk '$1 == "'"$conf"'" { print $2; exit }'
-}
+# _get_config() {
+# 	local conf="$1"; shift
+# 	"$@" --verbose --help 2>/dev/null | grep "^$conf" | awk '$1 == "'"$conf"'" { print $2; exit }'
+# }
 
 # If command starts with an option, prepend mysqld
 # This allows users to add command-line options without
 # needing to specify the "mysqld" command
-if [ "${1:0:1}" = '-' ]; then
-	set -- mysqld "$@"
-fi
+# if [ "${1:0:1}" = '-' ]; then
+# 	set -- mysqld "$@"
+# fi
 
 if [ "$1" = 'mysqld' ]; then
 	# Test that the server can start. We redirect stdout to /dev/null so
