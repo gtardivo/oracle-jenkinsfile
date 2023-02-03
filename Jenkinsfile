@@ -86,7 +86,7 @@ pipeline {
     def mysql_port_values = [22,389,443,3306,6446,6447,6448,6449,33060,33061,11211]
 
     parameters {
-      string(name: 'ENVIRONMENT_NAME', defaultValue: '', trim: true, description: '')
+      string(name: 'ENVIRONMENT_NAME', defaultValue: 'teste', trim: true, description: '')
       password(name: 'MYSQL_PASSWORD', defaultValue: '', description: 'Password to use for MySQL container - root user')
       string(name: 'MYSQL_PORT', defaultValue: '3306', description: 'Mysql port number', trim: true)
       booleanParam(name: 'SKIP_STEP_1', defaultValue: false, description: 'STEP 1 - RE-CREATE DOCKER IMAGE')
