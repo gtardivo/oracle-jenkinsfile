@@ -83,7 +83,7 @@ pipeline {
         disableResume()
     }
 
-    def mysql_port_values = [22,389,443,3306,6446,6447,6448,6449,33060,33061,11211]
+    //def mysql_port_values = [22,389,443,3306,6446,6447,6448,6449,33060,33061,11211]
 
     parameters {
       string(name: 'ENVIRONMENT_NAME', defaultValue: 'teste', trim: true, description: '')
@@ -92,11 +92,11 @@ pipeline {
       booleanParam(name: 'SKIP_STEP_1', defaultValue: false, description: 'STEP 1 - RE-CREATE DOCKER IMAGE')
     }
 
-    def mysql_port = params.MYSQL_PORT.toInteger()
+    //def mysql_port = params.MYSQL_PORT.toInteger()
 
-    if (!mysql_port_values.contains(mysql_port)) {
-      error("Invalid value for MYSQL_PORT. Valid values are: ${mysql_port_values.join(', ')}")
-    }
+    // if (!mysql_port_values.contains(mysql_port)) {
+    //   error("Invalid value for MYSQL_PORT. Valid values are: ${mysql_port_values.join(', ')}")
+    // }
 
     stages {
         /*stage('Checkout GIT repository') {
