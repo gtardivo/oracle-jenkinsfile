@@ -58,7 +58,7 @@ pipeline {
                             -e MYSQL_DATABASE=mydatabase \
                             -e MYSQL_USER=developer \
                             -e MYSQL_PASSWORD=123456 \
-                            -p $params.MYSQL_PORT:3306 \
+                            -p $params.MYSQL_PORT \
                             -v /path/to/my.cnf:/etc/mysql/my.cnf \
                             -v /path/to/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh \
                             -d $params.ENVIRONMENT_NAME:latest
