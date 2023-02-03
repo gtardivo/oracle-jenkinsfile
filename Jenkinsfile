@@ -8,7 +8,7 @@ pipeline {
     parameters {
         string(name: 'ENVIRONMENT_NAME', defaultValue: 'teste', trim: true, description: '')
         password(name: 'MYSQL_PASSWORD', defaultValue: '123456', description: 'Password to use for MySQL container - root user')
-        string(name: 'MYSQL_PORT', defaultValue: '3306', description: 'Mysql port number', trim: true)
+        string(name: 'MYSQL_PORT', defaultValue: '33062', description: 'Mysql port number', trim: true)
         booleanParam(name: 'SKIP_STEP_1', defaultValue: false, description: 'STEP 1 - RE-CREATE DOCKER IMAGE')
     }
     stages {
@@ -58,7 +58,7 @@ pipeline {
                             -e MYSQL_DATABASE=mydatabase \
                             -e MYSQL_USER=developer \
                             -e MYSQL_PASSWORD=123456 \
-                            -p $params.MYSQL_PORT \
+                            -p $params.MYSQL_PORT:3306 \
                             -v /path/to/my.cnf:/etc/mysql/my.cnf \
                             -v /path/to/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh \
                             -d $params.ENVIRONMENT_NAME:latest
