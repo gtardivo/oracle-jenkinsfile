@@ -35,7 +35,7 @@ ARG MYSQL_SHELL_PACKAGE=mysql-shell-8.0.22
 
 # Install server
 RUN yum install -y https://repo.mysql.com/mysql-community-minimal-release-el7.rpm \
-      https://repo.mysql.com/mysql-community-release-el7.rpm \
+    #  https://repo.mysql.com/mysql-community-release-el7.rpm \
   && yum-config-manager --enable mysql80-server-minimal \
   && yum install -y \
       $MYSQL_SERVER_PACKAGE \
