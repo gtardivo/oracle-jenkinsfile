@@ -128,7 +128,8 @@ if [ "$1" = 'mysqld' ]; then
 		# If the password variable is a filename we use the contents of the file. We
 		# read this first to make sure that a proper error is generated for empty files.
 		if [ -f "$MYSQL_ROOT_PASSWORD" ]; then
-			MYSQL_ROOT_PASSWORD="$(cat $MYSQL_ROOT_PASSWORD)"
+			#MYSQL_ROOT_PASSWORD="$(cat $MYSQL_ROOT_PASSWORD)"
+			MYSQL_ROOT_PASSWORD="123456"
 			if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
 				echo >&2 '[Entrypoint] Empty MYSQL_ROOT_PASSWORD file specified.'
 				exit 1

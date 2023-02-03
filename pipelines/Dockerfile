@@ -6,7 +6,7 @@ COPY include/docker-entrypoint.sh /
 
 RUN chmod +x docker-entrypoint.sh
 
-ENV MYSQL_ROOT_PASSWORD=123456
+ENV MYSQL_ROOT_PASSWORD="123456"
 
 ENTRYPOINT ["bash","docker-entrypoint.sh"]
 
