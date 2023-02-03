@@ -5,7 +5,8 @@ COPY include/create_developer.sql /scripts/
 
 COPY include/docker-entrypoint.sh /
 
-RUN chmod +x docker-entrypoint.sh
+RUN dos2unix docker-entrypoint.sh \
+    chmod +x docker-entrypoint.sh
 
 ENTRYPOINT ["bash","docker-entrypoint.sh"]
 
