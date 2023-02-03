@@ -143,9 +143,12 @@ pipeline {
                 sh """
                 docker logs ${containerName}
                 """
-                //$params.MYSQL_PASSWORD
+                //-c 'mysql --user="root" --password="123456" < /scripts/create_developer.sql'
                 sh """
-                docker exec ${containerName} /bin/bash -c 'mysql --user="root" --password="123456" < /scripts/create_developer.sql'
+                docker exec ${containerName} /bin/bash 
+                """
+                sh """
+                telnet 127.0.0.1 3306
                 """
                 echo "Docker container created: $containerName"
 
